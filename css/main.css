@@ -149,15 +149,15 @@ body {
 .container .container__random-cats-list .random-cats-item img {
     object-fit: cover;
     border-radius: 5px 5px 0px 0px;
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
+	-webkit-transition: .1s ease-in-out;
+	transition: .1s ease-in-out;
 }
 
 .container .container__uploaded-cats-list .uploaded-cats-item img:hover,
 .container .container__favorite-cats-list .favorite-cats-item img:hover,
 .container .container__random-cats-list .random-cats-item img:hover {
-    -webkit-transform: scale(1.1);
-	transform: scale(1.1);
+    -webkit-transform: scale(1.2);
+	transform: scale(1.2);
     border-radius: 5px 5px 5px 5px;
 }
 
@@ -178,24 +178,34 @@ body {
 .btn-action {
     background-color: var(--primary-color);
     color: #fff;
-    padding: 5px 20px;
+    padding: 5px 10px;
     border-radius: 5px;
     font-size: 15px;
     font-weight: bold;
+    border: none;
+    box-shadow: 0px 2px 5px 0.1px #000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
 }
 
 .btn-action:hover {
     color: var(--hover-color);
     cursor: pointer;
 }
+.btn-action span {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    margin: 0px 5px
+}
 
 .btn-new-cats {
     margin: 10px;
 }
 
-
-
-
-/* .container * {
+/* .btn-action * {
     border: 1px solid red;
 } */

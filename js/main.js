@@ -98,21 +98,27 @@ async function deleteUploadedCat(catImageId) {
 function generateUIRandomCat(cat) {
     return `<article class="random-cats-item" data-id="${cat.id}">
         <img width="200" height="200" src="${cat.url}" />
-        <button class="btn-action">❤</button>
+        <button title="Add to favorites" class="btn-action">
+            <span class="fi fi-sr-heart"></span>
+        </button>
     </article>`;
 }
 
 function generateUIUploadedCat(uploadedCat) {
     return `<article class="uploaded-cats-item" data-id="${uploadedCat.id}">
         <img src="${uploadedCat.url}" width="200" height="200" />
-        <button class="btn-action">Delete</button>
+        <button title="Delete image" class="btn-action">
+            <span class="fi fi-sr-trash"></span>
+        </button>
     </article>`;
 }
 
 function generateUIFavoriteCat(favoriteCat) {
     return `<article class="favorite-cats-item" data-id="${favoriteCat.id}">
         <img src="${favoriteCat.image.url}" width="200" height="200" />
-        <button class="btn-action">Remove favorite</button>
+        <button title="Remove from favorites" class="btn-action">
+            <span class="fi fi-sr-apps-delete"></span>
+        </button>
     </article>`;
 }
 
