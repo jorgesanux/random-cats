@@ -23,25 +23,26 @@
             </ul>
         </nav>
     </header>
-    <main>
-        <section>
-            <span class="error"></span>
+    <main class="container">
+        <section class="container__error">
+            <span class="error-title">ERROR:</span>
+            <span class="error-text"></span>
+        </section>
+        <section class="container__random-cats">
+            <h2 class="section-title">Random cats</h2>
+            <button class="btn-action btn-new-cats">New cats!!</button>
+            <div class="container__random-cats-list"></div>
+        </section>
+        <section class="container__favorite-cats">
+            <h2 class="section-title">❤ Favorite cats ❤</h2>
+            <div class="container__favorite-cats-list"></div>
+        </section>
+        <section class="container__uploaded-cats">
+            <h2 class="section-title">Uploaded cats</h2>
+            <div class="container__uploaded-cats-list"></div>
         </section>
         <section>
-            <h2>Random cats</h2>
-            <button class="btn-new-cats">New cats!!</button>
-            <div class="container-random-cats"></div>
-        </section>
-        <section>
-            <h2>Favorite cats</h2>
-            <div class="container-favorite-cats"></div>
-        </section>
-        <section>
-            <h2>Uploaded cats</h2>
-            <div class="container-uploaded-cats"></div>
-        </section>
-        <section>
-            <h2>Upload cat</h2>
+            <h2 class="section-title">Upload cat</h2>
             <article>
                 <form class="upload-image-form">
                     <input type="file" name="file" required>

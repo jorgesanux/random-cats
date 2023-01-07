@@ -10,9 +10,9 @@ const URL_UPLOADED_CATS = HOST + ENDPOINT_UPLOADED_CATS;
 const URL_UPLOAD_CATS = HOST + ENDPOINT_UPLOAD_CATS;
 const URL_FAVORITE_CATS = HOST + ENDPOINT_FAVORITE_CATS;
 
-const CONTAINER_RANDOM_CATS = document.querySelector(".container-random-cats");
-const CONTAINER_FAVORITE_CATS = document.querySelector(".container-favorite-cats");
-const CONTAINER_UPLOADED_CATS = document.querySelector(".container-uploaded-cats");
+const CONTAINER_RANDOM_CATS = document.querySelector(".container__random-cats-list");
+const CONTAINER_FAVORITE_CATS = document.querySelector(".container__favorite-cats-list");
+const CONTAINER_UPLOADED_CATS = document.querySelector(".container__uploaded-cats-list");
 const BUTTON_NEW_CATS = document.querySelector(".btn-new-cats");
 const SPAN_ERROR = document.querySelector(".error");
 const UPLOAD_IMAGE_FORM = document.querySelector(".upload-image-form");
@@ -96,23 +96,23 @@ async function deleteUploadedCat(catImageId) {
 
 //Generators UI components
 function generateUIRandomCat(cat) {
-    return `<article data-id="${cat.id}">
-        <img src="${cat.url}" width="150" alt="Random cat" />
-        <button>Add to favorites</button>
+    return `<article class="random-cats-item" data-id="${cat.id}">
+        <img width="200" height="200" src="${cat.url}" />
+        <button class="btn-action">❤</button>
     </article>`;
 }
 
 function generateUIUploadedCat(uploadedCat) {
-    return `<article data-id="${uploadedCat.id}">
-        <img src="${uploadedCat.url}" width="150" alt="Uploaded cat" />
-        <button>Delete</button>
+    return `<article class="uploaded-cats-item" data-id="${uploadedCat.id}">
+        <img src="${uploadedCat.url}" width="200" height="200" />
+        <button class="btn-action">Delete</button>
     </article>`;
 }
 
 function generateUIFavoriteCat(favoriteCat) {
-    return `<article data-id="${favoriteCat.id}">
-        <img src="${favoriteCat.image.url}" width="150" alt="Favorite cat" />
-        <button>Remove from favorites</button>
+    return `<article class="favorite-cats-item" data-id="${favoriteCat.id}">
+        <img src="${favoriteCat.image.url}" width="200" height="200" />
+        <button class="btn-action">Remove favorite</button>
     </article>`;
 }
 
@@ -120,9 +120,10 @@ function generateUIFavoriteCat(favoriteCat) {
 async function renderRandomCats() {
     try {
         const listCats = await getRandomCats();
-        const uiListCats = listCats.map(generateUIRandomCat);
+        const uiListCats = listCats.map(generateUIRandomCat).join("");
         CONTAINER_RANDOM_CATS.innerHTML = uiListCats;
     } catch (error) {
+        //TODO: Show the container error
         SPAN_ERROR.innerHTML += `An error occurred when obtaining the random cats: ${error.message}.</br>`;
     }
 }
@@ -130,9 +131,10 @@ async function renderRandomCats() {
 async function renderUploadedCats() {
     try {
         const listCats = await getUploadedCats();
-        const uiListCats = listCats.map(generateUIUploadedCat);
+        const uiListCats = listCats.map(generateUIUploadedCat).join("");
         CONTAINER_UPLOADED_CATS.innerHTML = uiListCats;
     } catch (error) {
+        //TODO: Show the container error
         SPAN_ERROR.innerHTML += `An error occurred when obtaining the uploaded cats: ${error.message}.</br>`;
     }
 }
@@ -140,9 +142,10 @@ async function renderUploadedCats() {
 async function renderFavoriteCats() {
     try {
         const listFavoriteCats = await gtFavoriteCats();
-        const uiListFavoriteCats = listFavoriteCats.map(generateUIFavoriteCat);
+        const uiListFavoriteCats = listFavoriteCats.map(generateUIFavoriteCat).join("");
         CONTAINER_FAVORITE_CATS.innerHTML = uiListFavoriteCats;
     } catch (error) {
+        //TODO: Show the container error
         SPAN_ERROR.innerHTML += `An error occurred when obtaining the favorite cats: ${error.message}.</br>`;
     }
 }
