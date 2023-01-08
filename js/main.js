@@ -16,6 +16,9 @@ const CONTAINER_UPLOADED_CATS = document.querySelector(".container__uploaded-cat
 const BUTTON_NEW_CATS = document.querySelector(".btn-new-cats");
 const SPAN_ERROR = document.querySelector(".error");
 const UPLOAD_IMAGE_FORM = document.querySelector(".upload-image-form");
+const UPLOAD_IMAGE_INPUT = document.getElementById("inputFileUpload");
+const UPLOAD_IMAGE_PREVIEW = document.querySelector(".image-preview");
+const UPLOAD_IMAGE_BUTTON = document.querySelector(".uploadBtn-action");
 
 //Getters
 async function getRandomCats() {
@@ -71,8 +74,9 @@ async function removeFavoriteCat(catFavoriteId) {
     return response.json();
 }
 
-async function uploadCat(uploadForm) {
-    const formData = new FormData(uploadForm);
+async function uploadCat(file) {
+    const formData = new FormData();
+    formData.set("file", file);
     const response = await fetch(URL_UPLOAD_CATS, {
         method: "POST",
         headers: {
@@ -159,46 +163,84 @@ async function renderFavoriteCats() {
 //Initializers
 function initEvents() {
     BUTTON_NEW_CATS.addEventListener("click", function (e) {
-        renderRandomCats().then(() => { });
+        setLoaderInButton(BUTTON_NEW_CATS);
+        renderRandomCats()
+            .then(() => { })
+            .finally(() => removeLoaderOnbutton(BUTTON_NEW_CATS))
     });
     CONTAINER_RANDOM_CATS.addEventListener("click", function (e) {
+        debugger;
         const element = e.target;
-        if (element.tagName !== "BUTTON") return;
+        if (!["BUTTON", "SPAN"].includes(element.tagName)) return;
 
+        const button = element.tagName !== "BUTTON" ? element.parentElement : element;
         const article = element.closest("article");
         const catId = article.dataset.id;
+
+        setLoaderInButton(button);
         addFavoriteCat(catId)
             .then(json => renderFavoriteCats())
-            .then(() => { });
+            .then(() => { })
+            .finally(() => removeLoaderOnbutton(button))
     });
     CONTAINER_FAVORITE_CATS.addEventListener("click", function (e) {
         const element = e.target;
-        if (element.tagName !== "BUTTON") return;
+        if (!["BUTTON", "SPAN"].includes(element.tagName)) return;
 
+        const button = element.tagName !== "BUTTON" ? element.parentElement : element;
         const article = element.closest("article");
         const favoriteId = article.dataset.id;
+
+        setLoaderInButton(button);
         removeFavoriteCat(favoriteId)
             .then(json => renderFavoriteCats())
-            .then(() => { });
+            .then(() => { })
+            .finally(() => removeLoaderOnbutton(button))
     });
     CONTAINER_UPLOADED_CATS.addEventListener("click", function (e) {
         const element = e.target;
-        if (element.tagName !== "BUTTON") return;
+        if (!["BUTTON", "SPAN"].includes(element.tagName)) return;
 
+        const button = element.tagName !== "BUTTON" ? element.parentElement : element;
         const article = element.closest("article");
         const catId = article.dataset.id;
+
+        setLoaderInButton(button);
         deleteUploadedCat(catId)
             .then(json => renderUploadedCats())
-            .then(() => { });
+            .then(() => { })
+            .finally(() => removeLoaderOnbutton(button))
     });
     UPLOAD_IMAGE_FORM.addEventListener("submit", function (e) {
-        uploadCat(this)
+        debugger;
+        const [file] = UPLOAD_IMAGE_INPUT.files;
+        setLoaderInButton(UPLOAD_IMAGE_BUTTON);
+        uploadCat(file)
             .then(json => renderUploadedCats())
             .then(() => {
                 this.reset();
+                UPLOAD_IMAGE_PREVIEW.src = "";
+            }).finally(() => {
+                removeLoaderOnbutton(UPLOAD_IMAGE_BUTTON);
             });
         e.preventDefault();
     });
+    UPLOAD_IMAGE_INPUT.addEventListener("change", function (e) {
+        const [file] = this.files
+        if (!file) return;
+        UPLOAD_IMAGE_PREVIEW.src = URL.createObjectURL(file);
+    })
+}
+
+//Utils
+function setLoaderInButton(button) {
+    button.classList.add("button--loading");
+    button.disabled = true;
+}
+
+function removeLoaderOnbutton(button) {
+    button.classList.remove("button--loading");
+    button.disabled = false;
 }
 
 function init() {

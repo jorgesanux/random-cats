@@ -33,7 +33,7 @@
         <!-- <hr class="diagonal-divider" style="display: none;"> -->
         <section id="random-cats" class="container__random-cats">
             <h2 class="section-title">Random cats</h2>
-            <button class="btn-action btn-new-cats"><span class="fi-sr-shuffle"></span><span>New cats</span></button>
+            <button class="btn-action btn-new-cats"><span class="fi fi-sr-shuffle"></span><span>New cats</span></button>
             <div class="container__random-cats-list"></div>
         </section>
         <hr class="diagonal-divider">
@@ -47,15 +47,27 @@
             <div class="container__uploaded-cats-list"></div>
         </section>
         <hr class="diagonal-divider">
-        <section id="upload-cat">
+        <section id="upload-cat" class="container__upload-cat">
             <h2 class="section-title">Upload cat</h2>
-            <article>
+            <article class="container__upload-cat__form">
                 <form class="upload-image-form">
-                    <input type="file" name="file" required>
-                    <input type="submit" value="Upload cat">
+                    <label for="inputFileUpload">
+                        <img class="image-preview" src="" alt="Select an image...">
+                        <input id="inputFileUpload" type="file" name="file" required
+                            accept="image/png, image/jpg, image/gif, image/jpeg">
+                    </label>
+                    <button class="btn-action uploadBtn-action" type="submit">
+                        <span class="fi fi-sr-arrow-up-from-square"></span>
+                        <span>Upload cat</span>
+                    </button>
                 </form>
             </article>
         </section>
+        <hr class="diagonal-divider-inverted">
+        <section>
+            <h2 class="section-title">jorgesanux</h2>
+        </section>
+        <hr class="diagonal-divider">
     </main>
 </body>
 
