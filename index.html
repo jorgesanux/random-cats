@@ -18,10 +18,10 @@
                 <a href="/index.html">Cats</a>
             </div>
             <ul class="navbar__wrapper">
-                <li class="navbar__item"><a href="#">Random cats</a></li>
-                <li class="navbar__item"><a href="#">Favorite cats</a></li>
-                <li class="navbar__item"><a href="#">Uploaded cats</a></li>
-                <li class="navbar__item"><a href="#">Upload cat</a></li>
+                <li class="navbar__item"><a href="#random-cats">Random cats</a></li>
+                <li class="navbar__item"><a href="#favorite-cats">Favorite cats</a></li>
+                <li class="navbar__item"><a href="#uploaded-cats">Uploaded cats</a></li>
+                <li class="navbar__item"><a href="#upload-cat">Upload cat</a></li>
             </ul>
         </nav>
     </header>
@@ -30,20 +30,24 @@
             <span class="error-title">ERROR:</span>
             <span class="error-text"></span>
         </section>
-        <section class="container__random-cats">
+        <!-- <hr class="diagonal-divider" style="display: none;"> -->
+        <section id="random-cats" class="container__random-cats">
             <h2 class="section-title">Random cats</h2>
             <button class="btn-action btn-new-cats"><span class="fi-sr-shuffle"></span><span>New cats</span></button>
             <div class="container__random-cats-list"></div>
         </section>
-        <section class="container__favorite-cats">
+        <hr class="diagonal-divider">
+        <section id="favorite-cats" class="container__favorite-cats">
             <h2 class="section-title">Favorite cats</h2>
             <div class="container__favorite-cats-list"></div>
         </section>
-        <section class="container__uploaded-cats">
+        <hr class="diagonal-divider-inverted">
+        <section id="uploaded-cats" class="container__uploaded-cats">
             <h2 class="section-title">Uploaded cats</h2>
             <div class="container__uploaded-cats-list"></div>
         </section>
-        <section>
+        <hr class="diagonal-divider">
+        <section id="upload-cat">
             <h2 class="section-title">Upload cat</h2>
             <article>
                 <form class="upload-image-form">
