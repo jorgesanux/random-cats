@@ -13,12 +13,14 @@ const URL_FAVORITE_CATS = HOST + ENDPOINT_FAVORITE_CATS;
 const CONTAINER_RANDOM_CATS = document.querySelector(".container__random-cats-list");
 const CONTAINER_FAVORITE_CATS = document.querySelector(".container__favorite-cats-list");
 const CONTAINER_UPLOADED_CATS = document.querySelector(".container__uploaded-cats-list");
+const CONTAINER_ERROR = document.querySelector(".container__error");
 const BUTTON_NEW_CATS = document.querySelector(".btn-new-cats");
-const SPAN_ERROR = document.querySelector(".error");
+const SPAN_ERROR = document.querySelector(".error-text");
 const UPLOAD_IMAGE_FORM = document.querySelector(".upload-image-form");
 const UPLOAD_IMAGE_INPUT = document.getElementById("inputFileUpload");
 const UPLOAD_IMAGE_PREVIEW = document.querySelector(".image-preview");
 const UPLOAD_IMAGE_BUTTON = document.querySelector(".uploadBtn-action");
+const SPAN_TEXT_NO_IMAGE = document.querySelector(".text-noimage");
 
 //Getters
 async function getRandomCats() {
@@ -133,8 +135,7 @@ async function renderRandomCats() {
         const uiListCats = listCats.map(generateUIRandomCat).join("");
         CONTAINER_RANDOM_CATS.innerHTML = uiListCats;
     } catch (error) {
-        //TODO: Show the container error
-        SPAN_ERROR.innerHTML += `An error occurred when obtaining the random cats: ${error.message}.</br>`;
+        showError(`An error occurred when obtaining the random cats: ${error.message}.</br>`);
     }
 }
 
@@ -144,8 +145,7 @@ async function renderUploadedCats() {
         const uiListCats = listCats.map(generateUIUploadedCat).join("");
         CONTAINER_UPLOADED_CATS.innerHTML = uiListCats;
     } catch (error) {
-        //TODO: Show the container error
-        SPAN_ERROR.innerHTML += `An error occurred when obtaining the uploaded cats: ${error.message}.</br>`;
+        showError(`An error occurred when obtaining the uploaded cats: ${error.message}.</br>`);
     }
 }
 
@@ -155,8 +155,7 @@ async function renderFavoriteCats() {
         const uiListFavoriteCats = listFavoriteCats.map(generateUIFavoriteCat).join("");
         CONTAINER_FAVORITE_CATS.innerHTML = uiListFavoriteCats;
     } catch (error) {
-        //TODO: Show the container error
-        SPAN_ERROR.innerHTML += `An error occurred when obtaining the favorite cats: ${error.message}.</br>`;
+        showError(`An error occurred when obtaining the favorite cats: ${error.message}.</br>`);
     }
 }
 
@@ -227,8 +226,12 @@ function initEvents() {
     });
     UPLOAD_IMAGE_INPUT.addEventListener("change", function (e) {
         const [file] = this.files
-        if (!file) return;
+        if (!file) {
+            showElement(SPAN_TEXT_NO_IMAGE);
+            return;
+        }
         UPLOAD_IMAGE_PREVIEW.src = URL.createObjectURL(file);
+        hideElement(SPAN_TEXT_NO_IMAGE);
     })
 }
 
@@ -241,6 +244,19 @@ function setLoaderInButton(button) {
 function removeLoaderOnbutton(button) {
     button.classList.remove("button--loading");
     button.disabled = false;
+}
+
+function showElement(element){
+    element.classList.remove('hide');
+}
+
+function hideElement(element){
+    element.classList.add('hide');
+}
+
+function showError(error){
+    showElement(CONTAINER_ERROR);
+    SPAN_ERROR.innerHTML += error;
 }
 
 function init() {
