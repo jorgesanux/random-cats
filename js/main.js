@@ -13,6 +13,7 @@ const URL_FAVORITE_CATS = HOST + ENDPOINT_FAVORITE_CATS;
 const CONTAINER_RANDOM_CATS = document.querySelector(".container__random-cats-list");
 const CONTAINER_FAVORITE_CATS = document.querySelector(".container__favorite-cats-list");
 const CONTAINER_UPLOADED_CATS = document.querySelector(".container__uploaded-cats-list");
+const NAVBAR_WRAPPER = document.querySelector(".navbar__wrapper");
 const CONTAINER_ERROR = document.querySelector(".container__error");
 const BUTTON_NEW_CATS = document.querySelector(".btn-new-cats");
 const SPAN_ERROR = document.querySelector(".error-text");
@@ -21,6 +22,7 @@ const UPLOAD_IMAGE_INPUT = document.getElementById("inputFileUpload");
 const UPLOAD_IMAGE_PREVIEW = document.querySelector(".image-preview");
 const UPLOAD_IMAGE_BUTTON = document.querySelector(".uploadBtn-action");
 const SPAN_TEXT_NO_IMAGE = document.querySelector(".text-noimage");
+const MENU_HAMBURGUER = document.querySelector(".menu-btn");
 
 //Getters
 async function getRandomCats() {
@@ -232,7 +234,13 @@ function initEvents() {
         }
         UPLOAD_IMAGE_PREVIEW.src = URL.createObjectURL(file);
         hideElement(SPAN_TEXT_NO_IMAGE);
-    })
+    });
+    MENU_HAMBURGUER.addEventListener("click", function(e) {
+        toggleHamburguerMenu();
+    });
+    NAVBAR_WRAPPER.addEventListener("click", function(e) {
+        toggleHamburguerMenu();
+    });
 }
 
 //Utils
@@ -257,6 +265,17 @@ function hideElement(element){
 function showError(error){
     showElement(CONTAINER_ERROR);
     SPAN_ERROR.innerHTML += error;
+}
+
+function toggleHamburguerMenu() {
+    if(MENU_HAMBURGUER.active){
+        NAVBAR_WRAPPER.classList.remove("active");
+        MENU_HAMBURGUER.innerHTML = `<span class="fi fi-sr-menu-burger">`;
+    } else {
+        NAVBAR_WRAPPER.classList.add("active");
+        MENU_HAMBURGUER.innerHTML = `<span class="fi fi-sr-cross">`;
+    }
+    MENU_HAMBURGUER.active = !MENU_HAMBURGUER.active;
 }
 
 function init() {

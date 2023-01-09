@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
+* {
+    box-sizing: border-box;
+}
+
 :root{
     --hover-color: #b7a7ff;
     --primary-color: #342578;
@@ -384,7 +388,67 @@ body {
     display: none;
 }
 
+.menu-btn {
+    display: none;
+}
+
 /*UTILS*/
 .hide {
     display: none !important;
+}
+
+@media screen and (max-width: 750px) {
+    .navbar {
+        flex-direction: column;
+        padding: 0px;
+    }
+    
+    .navbar .navbar__wrapper {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        display: none;
+    }
+
+    .active {
+        display: flex !important;
+    }
+
+    .navbar .navbar__wrapper .navbar__item,
+    .navbar .navbar__wrapper .navbar__item a {
+        width: 100%;
+    }
+
+    .navbar .navbar__wrapper .navbar__item {
+        margin: 0;
+    }
+
+    .navbar .navbar__logo {
+        border-right: none;
+        border-bottom: 2px solid var(--hover-color);
+    }
+
+    .navbar .navbar__logo-wrapper {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        padding: 9px;
+    }
+
+    .menu-btn {
+        margin-right: 10px;
+        color: #fff;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .upload-image-form label,
+    .upload-image-form label .text-noimage,
+    .upload-image-form img {
+        width: 250px;
+        height: 250px;
+    }
 }
